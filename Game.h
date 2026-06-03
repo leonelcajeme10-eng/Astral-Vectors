@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "World.h"
 
+#include "Renderer.h"
+
 enum GameState {
 	Menu,
 	Playing,
@@ -16,6 +18,9 @@ private:
 	sf::RenderWindow ventana;
 	GameState estado;
 	World world;
+	Assets assets; 
+	Hud hud;      
+	Renderer render;
 
 public:
 	Game();
