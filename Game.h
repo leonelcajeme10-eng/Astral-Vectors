@@ -14,7 +14,6 @@ class Game
 {
 private:
 	sf::RenderWindow ventana;
-	Player jugador;
 	GameState estado;
 	World world;
 

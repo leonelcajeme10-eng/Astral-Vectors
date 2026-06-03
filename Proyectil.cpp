@@ -6,9 +6,10 @@ Proyectil::Proyectil(sf::Vector2f posicionOrigen, ProjectileOwner propietarioOri
 
 	if (propietario == ProjectileOwner::Player)
 	{
-		radio = 8;
+		radio = 7;
 	}
 
+	danio = 10;
 	posicion = posicionOrigen;
 	velocidad = 700.f;
 	shape.setRadius(radio);

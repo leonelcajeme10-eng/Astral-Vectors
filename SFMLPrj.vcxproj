@@ -136,8 +136,11 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="PatronAtaque.h" />
+    <ClInclude Include="PatronRecto.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Proyectil.h" />
     <ClInclude Include="World.h" />

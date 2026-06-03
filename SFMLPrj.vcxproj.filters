@@ -47,5 +47,14 @@
     <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PatronAtaque.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PatronRecto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
