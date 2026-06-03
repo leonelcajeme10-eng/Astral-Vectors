@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "World.h"
 
+#include "Renderer.h"
+
 enum GameState {
 	Menu,
 	Playing,
@@ -17,6 +19,9 @@ private:
 	Player jugador;
 	GameState estado;
 	World world;
+	Assets assets; 
+	Hud hud;      
+	Renderer render;
 
 public:
 	Game();
