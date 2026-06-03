@@ -1,7 +1,8 @@
 #include "Game.h"
 #include "World.h"
+#include "Hud.h"
 
-Game::Game() : ventana(sf::VideoMode({ 1920, 1080 }), "Astral Vectors")
+Game::Game() : ventana(sf::VideoMode({ 1920, 1080 }), "Astral Vectors"), assets(), hud(), render(assets, hud)
 {
 }
 
@@ -18,11 +19,12 @@ void Game::run()
 			if (event->is<sf::Event::Closed>())
 				ventana.close();
 		}
-
+		
+		
 		world.update(dt);
-
 		ventana.clear();
 		world.render(ventana);
+		this->render.dibujar(ventana, world);
 		ventana.display();
 	}
 };
