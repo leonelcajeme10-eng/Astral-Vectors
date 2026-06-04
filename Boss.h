@@ -27,9 +27,10 @@ public:
 	std::vector<Proyectil> atacar();
 	void recibir_danio(int danio);
 	void cambiar_fase();
-	sf::Vector2f getPosicion() { return posicion; }
-	float getRadio() { return radio; }
-	int getVida() { return vida; }
-	int getFase() { return fase; }
+	sf::Vector2f getPosicion() const { return posicion; }
+	float getRadio() const { return radio; }
+	int getVida() const { return vida; }
+	int getVidaMax() const { return vida_max; }
+	int getFase() const { return fase; }
 
 };
