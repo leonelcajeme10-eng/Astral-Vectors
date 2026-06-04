@@ -9,6 +9,7 @@ void Hud::dibujar(sf::RenderWindow& window, const DatosHUD& datos, const Assets&
 
     this->dibujarPanel(window,asset);
 	dibujarVidaJugador(window,datos, asset);
+    dibujarVidaBoss(window, datos, asset);
     dibujarPuntuacion(window, datos, asset);
 	
 	
@@ -91,8 +92,46 @@ void Hud::dibujarVidaJugador(sf::RenderWindow& window, const DatosHUD& datos, co
     }
 }
 
-void Hud::dibujarVidaBoss(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente)
+void Hud::dibujarVidaBoss(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset)
 {
+    const float x = 1480.f;
+    const float y = 430.f;
+    const float ancho = 380.f;
+    const float alto = 95.f;
+
+    dibujarBarraNegra(window, asset, x, y, ancho, alto);
+
+    sf::Text titulo(asset.get_fuente("titulo"));
+    titulo.setString("BOSS");
+    titulo.setCharacterSize(30);
+    titulo.setFillColor(sf::Color(240, 235, 220, 240));
+    titulo.setOutlineColor(sf::Color(0, 0, 0, 180));
+    titulo.setOutlineThickness(1.f);
+    titulo.setPosition({ x + 25.f, y + 17.f });
+
+    window.draw(titulo);
+
+    sf::Text fase(asset.get_fuente("texto"));
+    fase.setString("F" + std::to_string(datos.fase));
+    fase.setCharacterSize(28);
+    fase.setFillColor(sf::Color(245, 240, 225, 255));
+    fase.setOutlineColor(sf::Color(0, 0, 0, 180));
+    fase.setOutlineThickness(1.f);
+
+    sf::FloatRect bounds = fase.getLocalBounds();
+    fase.setOrigin({ bounds.position.x + bounds.size.x, bounds.position.y });
+    fase.setPosition({ x + ancho - 25.f, y + 18.f });
+
+    window.draw(fase);
+
+    float porcentaje = 0.f;
+
+    if (datos.vidaMaxBoss > 0)
+    {
+        porcentaje = static_cast<float>(datos.vidaBoss) / datos.vidaMaxBoss;
+    }
+
+    dibujarBarra(window, x + 25.f, y + 62.f, ancho - 50.f, 12.f, porcentaje);
 }
 
 void Hud::dibujarPuntuacion(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset)
