@@ -2,24 +2,34 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 class Assets
 {
-private:
+protected:
 	map<string , sf::Texture > textures;
 	map<string, sf::Font> fonts;
+	sf::Font fontHUD;
+	sf::Font fontTitulo;
+	sf::Texture barra_lateral;
+	sf::Font fontJP;
+	sf::Texture textura_corazones;
+	sf::Texture textura_barra_negra;
 
+    
 
 public:
 	Assets() = default;
 
-	void cargar_texturas(const string& nombre, const string& ruta_archivo);
-	void cargar_fuentes(const string& nombre, const string& ruta_archivo);
+	bool cargar_texturas(); 
 
-	sf::Texture& get_texture(const string& nombre);
-	sf::Font& get_fuente(const string& nombre);
+	const sf::Texture& get_texture(const string& nombre) const;
+	const sf::Font& get_fuente(const string& nombre) const;
+
+	bool cargar();
+   
 
 };
 

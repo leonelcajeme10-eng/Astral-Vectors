@@ -23,6 +23,7 @@ public:
 	void dibujar_jugador();
 	void dibujar_boss();
 	void dibujar_proyectiles();
+	
 
 
 
