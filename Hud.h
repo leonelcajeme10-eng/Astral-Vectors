@@ -34,7 +34,7 @@ private:
     void dibujarPanel(sf::RenderWindow& window, const Assets& asset);
     void dibujarBarraNegra(sf::RenderWindow& window, const Assets& asset, float x, float y, float ancho, float alto);
     void dibujarVidaJugador(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset);
-    void dibujarVidaBoss(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);
+    void dibujarVidaBoss(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset);
     void dibujarPuntuacion(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset);
     void dibujarTiempo(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);
     void dibujarFase(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);

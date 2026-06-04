@@ -40,3 +40,28 @@ void World::render(sf::RenderWindow& ventana)
 		proyectil.render(ventana);
 	}
 };
+
+int World::getVidaJugador() const
+{
+	return jugador.getVida();
+}
+
+int World::getVidaMaxJugador() const
+{
+	return jugador.getVidaMax();
+}
+
+int World::getVidaBoss() const
+{
+	return jefe.getVida();
+}
+
+int World::getVidaMaxBoss() const
+{
+	return jefe.getVidaMax();
+}
+
+int World::getFaseBoss() const
+{
+	return jefe.getFase();
+}

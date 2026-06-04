@@ -24,9 +24,9 @@ public:
 	Proyectil disparar();
 	float Dash(float dt);
 	void recibir_danio(int danio);
-	int getVida() { return vida; };
-	sf::Vector2f getPosicion() { return posicion; }
-	float getRadio() { return radio; }
-	int getVidaMax() { return vida_max; }
-	bool getDash() { return dash; }
+	int getVida() const { return vida; };
+	sf::Vector2f getPosicion() const { return posicion; }
+	float getRadio() const { return radio; }
+	int getVidaMax() const { return vida_max; }
+	bool getDash() const { return dash; }
 };
