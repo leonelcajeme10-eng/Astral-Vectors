@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
+#include "Assets.h"
 struct DatosHUD
 {
     int vidaJugador = 80;
@@ -17,10 +17,11 @@ class Hud
 {
 public:
 
-    void dibujar(sf::RenderWindow& window, const DatosHUD& datos);
+    void dibujar(sf::RenderWindow& window, const DatosHUD& datos, const Assets& assets);
     Hud() = default;
 
 private:
+   
     const float hudX = 1440.f;
     const float hudY = 0.f;
     const float hudAncho = 480.f;
@@ -28,16 +29,17 @@ private:
     const float margen = 40.f;
     float xTexto = hudX + margen; // 1480
     float anchoInterno = hudAncho - margen * 2; // 400
+   
 
-
-    void dibujarPanel(sf::RenderWindow& window);
-    void dibujarVidaJugador(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);
+    void dibujarPanel(sf::RenderWindow& window, const Assets& asset);
+    void dibujarBarraNegra(sf::RenderWindow& window, const Assets& asset, float x, float y, float ancho, float alto);
+    void dibujarVidaJugador(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset);
     void dibujarVidaBoss(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);
-    void dibujarPuntuacion(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);
+    void dibujarPuntuacion(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset);
     void dibujarTiempo(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);
     void dibujarFase(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);
 
-    void dibujarBarra(sf::RenderWindow& window, float x, float y, float ancho, float alto, float porcentaje);
+    void dibujarBarra(sf::RenderWindow& window, float x, float y, float ancho, float alto, float porcentaje) const;
 };
 
 
