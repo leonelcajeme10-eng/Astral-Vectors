@@ -4,6 +4,7 @@
 
 Game::Game() : ventana(sf::VideoMode({ 1920, 1080 }), "Astral Vectors"), assets(), hud(), render(assets, hud)
 {
+	ventana.setFramerateLimit(60);
 }
 
 void Game::run()

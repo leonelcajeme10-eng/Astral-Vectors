@@ -2,13 +2,18 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Proyectil.h"
+#include "Boss.h"
 #include <vector>
+#include "SistemaColisiones.h"
 
 class World
 {
 private:
 	Player jugador;
+	Boss jefe;
 	std::vector<Proyectil> proyectiles;
+	std::vector<Proyectil> proyectilesJefe;
+	SistemaColisiones sistema_colisiones;
 
 public:
 	void update(float dt);

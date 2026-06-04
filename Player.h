@@ -13,6 +13,7 @@ private:
 	float cooldown_dash;
 	float cooldown_actual_dash;
 	float duracion_dash;
+	bool dash;
 
 public:
 	Player();
@@ -22,8 +23,10 @@ public:
 	bool canShoot(); //indica si ya puede disparar xd
 	Proyectil disparar();
 	float Dash(float dt);
+	void recibir_danio(int danio);
 	int getVida() { return vida; };
 	sf::Vector2f getPosicion() { return posicion; }
 	float getRadio() { return radio; }
 	int getVidaMax() { return vida_max; }
+	bool getDash() { return dash; }
 };

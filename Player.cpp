@@ -14,6 +14,7 @@ Player::Player()
 	cooldown_dash = 1.f;
 	cooldown_actual_dash = cooldown_dash;
 	duracion_dash = 0.15f;
+	dash = false;
 
 	shape.setRadius(radio);
 	shape.setFillColor(sf::Color::White);
@@ -52,8 +53,8 @@ void Player::update(float dt)
 	if (posicion.x < radio)
 		posicion.x = radio;
 
-	if (posicion.x > 1920 - radio)
-		posicion.x = 1920 - radio;
+	if (posicion.x > 1440 - radio)
+		posicion.x = 1440 - radio;
 
 	if (posicion.y < radio)
 		posicion.y = radio;
@@ -100,8 +101,18 @@ float Player::Dash(float dt)
 
 	if (cooldown_actual_dash < duracion_dash)
 	{
+		dash = true;
 		return 3.f;
 	}
-
+	
+	dash = false;
 	return 1.f;
+}
+
+void Player::recibir_danio(int danio)
+{
+	vida -= danio;
+
+	if (vida < 0)
+		vida = 0;
 };
