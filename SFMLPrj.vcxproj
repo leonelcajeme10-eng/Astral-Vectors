@@ -144,22 +144,29 @@ if exist "$(ProjectDir)sfml-*-3.dll" copy /Y "$(ProjectDir)sfml-*-3.dll" "$(OutD
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PatronRecto.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Proyectil.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="SistemaColisiones.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assets.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Hud.h" />
+    <ClInclude Include="PatronAtaque.h" />
+    <ClInclude Include="PatronRecto.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Proyectil.h" />
-    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Render.h" />
+    <ClInclude Include="SistemaColisiones.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

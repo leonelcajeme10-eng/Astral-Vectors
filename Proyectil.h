@@ -23,4 +23,6 @@ public:
 	void render(sf::RenderWindow& ventana) override;
 	float getPosicionY() { return posicion.y; };
 	float getPosicionX() { return posicion.x; };
+	sf::Vector2f getPosicion() { return posicion; }
+	float getRadio() { return radio; }
 };
