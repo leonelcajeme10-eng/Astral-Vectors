@@ -14,7 +14,6 @@ private:
 	float tiempo_ataque;
 	int patron_actual;
 	int fase;
-	int vidas;
 	float velocidad;
 	int direccion; // 1 derecha, -1 izquierda
 	bool detenido;

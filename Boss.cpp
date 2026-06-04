@@ -2,12 +2,11 @@
 
 Boss::Boss()
 {
+	vida_max = 1000;
 	vida = vida_max;
-	vida_max = 150;
 	tiempo_ataque = 0.8f;
 	patron_actual = 1;
 	fase = 1;
-	vidas = 1;
 	velocidad = 250.f;
 	direccion = 1;
 	radio = 50.f;
@@ -89,20 +88,17 @@ void Boss::recibir_danio(int danio)
 	vida -= danio;
 
 	if (vida < 0)
-		this->cambiar_fase();
+		vida = 0;
+
+	cambiar_fase();
 }
 
 void Boss::cambiar_fase()
 {
-	vidas--;
-	
-	if (vidas > 0)
-	{
-		fase++;
-		vida = vida_max;
-	}
+	if (vida <= vida_max * 0.35f)
+		fase = 3;
+	else if (vida <= vida_max * 0.70f)
+		fase = 2;
 	else
-	{
-		vida = 0;
-	}
+		fase = 1;
 }
