@@ -14,6 +14,7 @@ private:
 	float tiempo_ataque;
 	int patron_actual;
 	int fase;
+	int vidas;
 	float velocidad;
 	int direccion; // 1 derecha, -1 izquierda
 	bool detenido;
@@ -29,5 +30,6 @@ public:
 	sf::Vector2f getPosicion() { return posicion; }
 	float getRadio() { return radio; }
 	int getVida() { return vida; }
+	int getFase() { return fase; }
 
 };

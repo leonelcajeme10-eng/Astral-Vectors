@@ -27,7 +27,7 @@ void World::update(float dt)
 		}
 	}
 
-	sistema_colisiones.verificar_colisiones(jugador, jefe, proyectiles);
+	sistema_colisiones.verificar_colisiones(jugador, jefe, proyectiles, dt);
 }
 
 void World::render(sf::RenderWindow& ventana)

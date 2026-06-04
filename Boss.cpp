@@ -2,11 +2,12 @@
 
 Boss::Boss()
 {
-	vida = 500;
-	vida_max = vida;
+	vida = vida_max;
+	vida_max = 150;
 	tiempo_ataque = 0.8f;
 	patron_actual = 1;
 	fase = 1;
+	vidas = 1;
 	velocidad = 250.f;
 	direccion = 1;
 	radio = 50.f;
@@ -24,33 +25,35 @@ void Boss::update(float dt)
 {
 	tiempo_ataque += dt;
 
-
-	//se detiene
-	if (detenido)
+	if (fase == 1)
 	{
-		tiempo_detencion += dt;
-
-		if (tiempo_detencion >= 0.30f)
+		//se detiene
+		if (detenido)
 		{
-			detenido = false;
-			tiempo_detencion = 0.f;
+			tiempo_detencion += dt;
+
+			if (tiempo_detencion >= 0.30f)
+			{
+				detenido = false;
+				tiempo_detencion = 0.f;
+			}
+
+			shape.setPosition(posicion);
+			return;
 		}
 
-		shape.setPosition(posicion);
-		return;
-	}
+		posicion.x += velocidad * direccion * dt; //calcula la posicion
 
-	posicion.x += velocidad * direccion * dt; //calcula la posicion
+		//Esto hace que se mueva hacia la izquierda o la derecha
+		if (posicion.x > 1220.f)
+		{
+			direccion = -1;
+		}
 
-	//Esto hace que se mueva hacia la izquierda o la derecha
-	if (posicion.x > 1220.f)
-	{
-		direccion = -1;
-	}
-
-	if (posicion.x < 200.f)
-	{
-		direccion = 1;
+		if (posicion.x < 200.f)
+		{
+			direccion = 1;
+		}
 	}
 
 	shape.setPosition(posicion);
@@ -86,5 +89,20 @@ void Boss::recibir_danio(int danio)
 	vida -= danio;
 
 	if (vida < 0)
+		this->cambiar_fase();
+}
+
+void Boss::cambiar_fase()
+{
+	vidas--;
+	
+	if (vidas > 0)
+	{
+		fase++;
+		vida = vida_max;
+	}
+	else
+	{
 		vida = 0;
+	}
 }
