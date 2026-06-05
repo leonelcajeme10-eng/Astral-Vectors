@@ -6,6 +6,7 @@ void World::update(float dt)
 {
 	jugador.update(dt); // actualiza jugador
 	jefe.update(dt);
+	sistema_puntuacion.update(dt);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && (jugador.canShoot()))
 		proyectiles.push_back(Proyectil(jugador.disparar())); // el jugador dispara, devuelve un proyectil al vector de proyectiles
 
@@ -24,10 +25,11 @@ void World::update(float dt)
 		{
 			proyectiles.erase(proyectiles.begin() + i); // si el proyectil sale de la pantalla lo borra
 			i--; // reajusta el vector pana
+			sistema_puntuacion.agregar_bala_esquivada();
 		}
 	}
 
-	sistema_colisiones.verificar_colisiones(jugador, jefe, proyectiles);
+	sistema_colisiones.verificar_colisiones(jugador, jefe, proyectiles, dt, sistema_puntuacion);
 }
 
 void World::render(sf::RenderWindow& ventana)
@@ -64,4 +66,9 @@ int World::getVidaMaxBoss() const
 int World::getFaseBoss() const
 {
 	return jefe.getFase();
+}
+
+int World::getPuntuacion() const
+{
+	return sistema_puntuacion.getPuntuacion();
 }

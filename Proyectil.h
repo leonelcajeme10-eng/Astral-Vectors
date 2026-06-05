@@ -14,9 +14,11 @@ private:
 	sf::CircleShape shape;
 	int danio;
 	ProjectileOwner propietario;
+	sf::Vector2f direccion;
 
 public:
 	Proyectil(sf::Vector2f posicionOrigen, ProjectileOwner propietarioOrigen);
+	Proyectil(sf::Vector2f posicionOrigen, ProjectileOwner propietarioOrigen, sf::Vector2f direccionOrigen);
 	void update(float dt);
 	int getDanio() { return danio; };
 	ProjectileOwner getPropietario() { return propietario; };
