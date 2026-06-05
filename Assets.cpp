@@ -24,11 +24,35 @@ bool Assets::cargar_texturas()
         std::cout << "No se pudo cargar assets/images/barra_negra.png\n";
         return false;
     }
+    this->textura_barra_negra.setSmooth(true);
+
+    if (!this->textura_menu.loadFromFile("assets/images/menu_final.png"))
+    {
+        std::cout << "No se pudo cargar assets/images/menu_final.png\n";
+        return false;
+    }
+    this->textura_menu.setSmooth(true);
 
     textures["barra_lateral"] = barra_lateral;
     textures["corazon"] = textura_corazones;
     textures["barra_negra"] = textura_barra_negra;
+    textures["menu"] = textura_menu;
     
+    return true;
+}
+
+bool Assets::cargar_musica()
+{
+    if (!musica_menu.openFromFile("assets/Music/cancion_menu_vorbis.ogg"))
+    {
+        std::cout << "No se pudo cargar assets/Music/cancion_menu_vorbis.ogg\n";
+        return false;
+    }
+
+    musica_menu.setLooping(true);
+    musica_menu.setVolume(40.f);
+    musica_menu.play();
+
     return true;
 }
 

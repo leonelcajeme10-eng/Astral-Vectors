@@ -174,12 +174,12 @@ void Hud::dibujarPuntuacion(sf::RenderWindow& window, const DatosHUD& datos, con
 
 void Hud::dibujarTiempo(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente)
 {
-    // Implementación pendiente
+    
 }
 
 void Hud::dibujarFase(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente)
 {
-    // Implementación pendiente
+    
 }
 
 void Hud::dibujarBarra(sf::RenderWindow& window, float x, float y, float ancho, float alto, float porcentaje) const

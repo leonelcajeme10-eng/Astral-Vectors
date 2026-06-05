@@ -48,6 +48,7 @@
     <ClCompile Include="SistemaColisiones.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="menu.cpp">
     <ClCompile Include="PatronAbanico.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -95,6 +96,7 @@
     <ClInclude Include="SistemaColisiones.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="menu.h">
     <ClInclude Include="PatronAbanico.h">
       <Filter>Header Files</Filter>
     </ClInclude>
