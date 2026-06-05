@@ -19,7 +19,7 @@ private:
 	vector<string> opciones = { "COMENZAR" , "SALIR" };
 
 public: 
-	void manejar_evento(sf::Event& evento, GameState& estado);
+	bool manejar_evento(const sf::Event& evento, GameState& estado);
 	void dibujar(sf::RenderWindow& window, Assets& assets);
 };
 

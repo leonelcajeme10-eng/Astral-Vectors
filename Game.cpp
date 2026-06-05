@@ -25,15 +25,38 @@ void Game::run()
 		return;
 	}
 
-
+	if (!assets.cargar_musica())
+	{
+		cout << "\n error al cargar musica";
+		return;
+	}
 
 	while (ventana.isOpen())
 	{
 		float dt = clock.restart().asSeconds();
 
+		while (auto evento = ventana.pollEvent())
+		{
+			GameState estado_anterior = estado;
+
+			if (evento->is<sf::Event::Closed>())
+			{
+				ventana.close();
+			}
+
+			if (this->estado == GameState::Menu_estado && menu_principal.manejar_evento(*evento, estado))
+			{
+				ventana.close();
+			}
+
+			if (estado_anterior == GameState::Menu_estado && estado == GameState::Playing)
+			{
+				assets.musica_menu.stop();
+			}
+		}
+
 		ventana.clear();
 
-		
 		if (this->estado == GameState::Menu_estado)
 		{
 			menu_principal.dibujar(ventana, assets);

@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <SFML/Audio.hpp>
 
 using namespace std;
 
@@ -19,12 +20,12 @@ protected:
 	sf::Texture textura_barra_negra;
 	sf::Texture textura_menu;
 
-    
-
 public:
+	sf::Music musica_menu;
 	Assets() = default;
 
 	bool cargar_texturas(); 
+	bool cargar_musica();
 
 	const sf::Texture& get_texture(const string& nombre) const;
 	const sf::Font& get_fuente(const string& nombre) const;
