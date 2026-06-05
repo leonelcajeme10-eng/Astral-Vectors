@@ -25,9 +25,16 @@ bool Assets::cargar_texturas()
         return false;
     }
 
+    if (!this->textura_menu.loadFromFile("assets/images/menu.png"))
+    {
+        std::cout << "No se pudo cargar assets/images/menu.png\n";
+        return false;
+    }
+
     textures["barra_lateral"] = barra_lateral;
     textures["corazon"] = textura_corazones;
     textures["barra_negra"] = textura_barra_negra;
+    textures["menu"] = textura_menu;
     
     return true;
 }

@@ -17,6 +17,7 @@ protected:
 	sf::Font fontJP;
 	sf::Texture textura_corazones;
 	sf::Texture textura_barra_negra;
+	sf::Texture textura_menu;
 
     
 
