@@ -51,6 +51,12 @@
     <ClCompile Include="PatronAbanico.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PatronCircular.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SistemaPuntuacion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -90,6 +96,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PatronAbanico.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PatronCircular.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SistemaPuntuacion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

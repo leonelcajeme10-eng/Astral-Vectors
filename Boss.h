@@ -4,6 +4,7 @@
 #include "PatronAtaque.h"
 #include "PatronRecto.h"
 #include "PatronAbanico.h"
+#include "PatronCircular.h"
 #include <vector>
 
 class Boss : public Entity

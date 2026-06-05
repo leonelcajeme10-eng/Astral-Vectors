@@ -6,7 +6,7 @@ SistemaColisiones::SistemaColisiones()
     cooldown_colision = 2.0f;
 }
 
-void SistemaColisiones::verificar_colisiones(Player& jugador, Boss& jefe, std::vector<Proyectil>& proyectiles, float dt)
+void SistemaColisiones::verificar_colisiones(Player& jugador, Boss& jefe, std::vector<Proyectil>& proyectiles, float dt, SistemaPuntuacion& puntuaciones)
 {
     // Colision de proyectiles de jugador a jefe y viceversa
     for (int i = 0; i < proyectiles.size(); i++)
@@ -16,6 +16,7 @@ void SistemaColisiones::verificar_colisiones(Player& jugador, Boss& jefe, std::v
             if (Colisiona(proyectiles[i].getPosicion(), proyectiles[i].getRadio(), jefe.getPosicion(), jefe.getRadio()))
             {
                 jefe.recibir_danio(proyectiles[i].getDanio());
+                puntuaciones.agregar_danio(proyectiles[i].getDanio());
                 proyectiles.erase(proyectiles.begin() + i);
                 i--;
             }

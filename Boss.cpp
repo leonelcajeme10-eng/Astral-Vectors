@@ -168,6 +168,18 @@ std::vector<Proyectil> Boss::atacar()
 		}
 	}
 
+	if (fase == 3)
+	{
+		if (!detenido && tiempo_ataque >= 0.65f) // si no esta detenido y ya es tiempo de atacar, genera proyectiles
+		{
+			PatronCircular patron;
+			proyectiles = patron.generar(posicion); // genera los proyectiles del patron circular
+
+			tiempo_ataque = 0.f;
+			detenido = true;
+			tiempo_detencion = 0.f;
+		}
+	}
 	return proyectiles; 
 }
 

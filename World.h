@@ -5,6 +5,7 @@
 #include "Boss.h"
 #include <vector>
 #include "SistemaColisiones.h"
+#include "SistemaPuntuacion.h"
 
 class World
 {
@@ -14,6 +15,7 @@ private:
 	std::vector<Proyectil> proyectiles;
 	std::vector<Proyectil> proyectilesJefe;
 	SistemaColisiones sistema_colisiones;
+	SistemaPuntuacion sistema_puntuacion;
 
 public:
 	void update(float dt);
@@ -23,4 +25,5 @@ public:
 	int getVidaBoss() const;
 	int getVidaMaxBoss() const;
 	int getFaseBoss() const;
+	int getPuntuacion() const;
 };
