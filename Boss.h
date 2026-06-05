@@ -3,6 +3,8 @@
 #include "Proyectil.h"
 #include "PatronAtaque.h"
 #include "PatronRecto.h"
+#include "PatronAbanico.h"
+#include "PatronCircular.h"
 #include <vector>
 
 class Boss : public Entity
@@ -16,6 +18,7 @@ private:
 	int fase;
 	float velocidad;
 	int direccion; // 1 derecha, -1 izquierda
+	int direccionY;
 	bool detenido;
 	float tiempo_detencion;
 
