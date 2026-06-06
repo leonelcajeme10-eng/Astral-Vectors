@@ -49,6 +49,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="PatronAbanico.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -97,6 +99,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="PatronAbanico.h">
       <Filter>Header Files</Filter>
     </ClInclude>
