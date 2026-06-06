@@ -7,7 +7,7 @@ Player::Player()
 	vida = 100;
 	vida_max = vida;
 	velocidad = 500.f;
-	posicion = { 400.f, 300.f };
+	posicion = { 740.f, 900.f };
 	radio = 30.f;
 	cooldown_disparo = 0.4f;
 	cooldown_actual = 0.4f;

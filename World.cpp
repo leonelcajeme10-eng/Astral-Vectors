@@ -2,6 +2,12 @@
 #include "SistemaColisiones.h"
 #include <iostream>
 
+World::World()
+{
+	cooldownInicialBoss = true;
+	tiempoInicioBoss = 0.f;
+}
+
 void World::update(float dt)
 {
 	jugador.update(dt); // actualiza jugador
@@ -10,11 +16,23 @@ void World::update(float dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && (jugador.canShoot()))
 		proyectiles.push_back(Proyectil(jugador.disparar())); // el jugador dispara, devuelve un proyectil al vector de proyectiles
 
-	proyectilesJefe = jefe.atacar(); // le devuelven los proyectiles de atacar
-
-	for (auto& proyectil : proyectilesJefe) // recorre los proyectiles jefe y los mete a los totales
+	if (cooldownInicialBoss)
 	{
-		proyectiles.push_back(proyectil);
+		tiempoInicioBoss += dt;
+
+		if (tiempoInicioBoss >= 1.0f)
+		{
+			cooldownInicialBoss = false;
+		}
+	}
+	else
+	{
+		std::vector<Proyectil> proyectilesJefe = jefe.atacar();
+
+		for (auto& proyectil : proyectilesJefe) // recorre los proyectiles jefe y los mete a los totales
+		{
+			proyectiles.push_back(proyectil);
+		}
 	}
 
 	for (int i = 0; i < proyectiles.size(); i++) // recorre el vector de proyectiles

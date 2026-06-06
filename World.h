@@ -16,8 +16,11 @@ private:
 	std::vector<Proyectil> proyectilesJefe;
 	SistemaColisiones sistema_colisiones;
 	SistemaPuntuacion sistema_puntuacion;
+	bool cooldownInicialBoss;
+	float tiempoInicioBoss;
 
 public:
+	World();
 	void update(float dt);
 	void render(sf::RenderWindow& ventana); // renderiza todo lo que hay en el juego (jugador, boss, proyectiles)
 	int getVidaJugador() const;
