@@ -1,4 +1,5 @@
 #include "Boss.h"
+#include <iostream>
 
 Boss::Boss()
 {
@@ -14,6 +15,17 @@ Boss::Boss()
 	posicion = { 710.f, 100.f };
 	tiempo_detencion = 0.f;
 	detenido = false;
+	tiempo_animacion = 0.f;
+	textura_cargada = textura.loadFromFile("assets/images/boss_sprite.png");
+
+	if (textura_cargada)
+	{
+		textura.setSmooth(true);
+	}
+	else
+	{
+		std::cout << "No se pudo cargar assets/images/boss_sprite.png\n";
+	}
 
 	shape.setRadius(radio);
 	shape.setFillColor(sf::Color::Blue);
@@ -24,6 +36,7 @@ Boss::Boss()
 void Boss::update(float dt)
 {
 	tiempo_ataque += dt;
+	tiempo_animacion += dt;
 
 	if (vida > 0)
 	{
@@ -138,6 +151,24 @@ void Boss::update(float dt)
 
 void Boss::render(sf::RenderWindow& ventana)
 {
+	if (textura_cargada)
+	{
+		sf::Sprite sprite(textura);
+		const sf::Vector2u tam = textura.getSize();
+		const float altoObjetivo = 190.f;
+		const float escalaBase = altoObjetivo / static_cast<float>(tam.y);
+		const float pulso = 1.f + std::sin(tiempo_animacion * 2.5f) * 0.02f;
+		const float flotacion = std::sin(tiempo_animacion * 2.f) * 7.f;
+		const float balanceo = std::sin(tiempo_animacion * 1.4f) * 2.f;
+
+		sprite.setOrigin({ tam.x / 2.f, tam.y / 2.f });
+		sprite.setScale({ escalaBase * pulso, escalaBase * pulso });
+		sprite.setRotation(sf::degrees(balanceo));
+		sprite.setPosition({ posicion.x, posicion.y + flotacion });
+		ventana.draw(sprite);
+		return;
+	}
+
 	ventana.draw(shape);
 }
 

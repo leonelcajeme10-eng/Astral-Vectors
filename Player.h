@@ -6,6 +6,8 @@ class Player : public Entity
 {
 private:
 	sf::CircleShape shape;
+	sf::Texture textura;
+	bool textura_cargada;
 	int vida;
 	int vida_max;
 	float cooldown_disparo;
@@ -14,6 +16,8 @@ private:
 	float cooldown_actual_dash;
 	float duracion_dash;
 	bool dash;
+	float tiempo_animacion;
+	float inclinacion_sprite;
 
 public:
 	Player();

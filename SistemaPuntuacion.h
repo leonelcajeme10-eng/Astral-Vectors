@@ -16,7 +16,7 @@ public:
 	void agregar_danio(int danio);
 	void agregar_bala_esquivada();
 	int getPuntuacion() const;
-	float getTiempo() { return tiempo; }
+	float getTiempo() const { return tiempo; }
 	int getBalasEsquivadas() { return balas_esquivadas; }
 	int getDanioInfligido() { return danio_infligido; }
 

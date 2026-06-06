@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Proyectil.h"
 #include <cmath>
+#include <iostream>
 
 Player::Player()
 {
@@ -15,6 +16,18 @@ Player::Player()
 	cooldown_actual_dash = cooldown_dash;
 	duracion_dash = 0.15f;
 	dash = false;
+	tiempo_animacion = 0.f;
+	inclinacion_sprite = 0.f;
+	textura_cargada = textura.loadFromFile("assets/images/player_sprite.png");
+
+	if (textura_cargada)
+	{
+		textura.setSmooth(true);
+	}
+	else
+	{
+		std::cout << "No se pudo cargar assets/images/player_sprite.png\n";
+	}
 
 	shape.setRadius(radio);
 	shape.setFillColor(sf::Color::White);
@@ -23,6 +36,8 @@ Player::Player()
 }
 void Player::update(float dt)
 {
+	tiempo_animacion += dt;
+
 	sf::Vector2f movimiento{ 0.f, 0.f };
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
@@ -46,6 +61,7 @@ void Player::update(float dt)
 	}
 
 	float multiplicador_dash = Dash(dt); // devuelve 1 o 3 si esta en dashito o no
+	inclinacion_sprite = movimiento.x * 5.f;
 
 	posicion += movimiento * velocidad * multiplicador_dash * dt; //calcula la posicion actual con el movimiento nuevo
 
@@ -69,6 +85,24 @@ void Player::update(float dt)
 
 void Player::render(sf::RenderWindow& ventana)
 {
+	if (textura_cargada)
+	{
+		sf::Sprite sprite(textura);
+		const sf::Vector2u tam = textura.getSize();
+		const float altoObjetivo = 130.f;
+		const float escalaBase = altoObjetivo / static_cast<float>(tam.y);
+		const float escala = escalaBase * (dash ? 1.08f : 1.f);
+		const float flotacion = std::sin(tiempo_animacion * 7.f) * 2.f;
+		const float respiracion = 1.f + std::sin(tiempo_animacion * 5.f) * 0.015f;
+
+		sprite.setOrigin({ tam.x / 2.f, tam.y / 2.f });
+		sprite.setScale({ escala * respiracion, escala * respiracion });
+		sprite.setRotation(sf::degrees(inclinacion_sprite + std::sin(tiempo_animacion * 6.f) * 1.2f));
+		sprite.setPosition({ posicion.x, posicion.y + flotacion });
+		ventana.draw(sprite);
+		return;
+	}
+
 	ventana.draw(shape);
 }
 

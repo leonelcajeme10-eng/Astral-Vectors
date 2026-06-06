@@ -33,10 +33,18 @@ bool Assets::cargar_texturas()
     }
     this->textura_menu.setSmooth(true);
 
+    if (!this->textura_nixie_tube.loadFromFile("assets/images/nixie_tube.png"))
+    {
+        std::cout << "No se pudo cargar assets/images/nixie_tube.png\n";
+        return false;
+    }
+    this->textura_nixie_tube.setSmooth(true);
+
     textures["barra_lateral"] = barra_lateral;
     textures["corazon"] = textura_corazones;
     textures["barra_negra"] = textura_barra_negra;
     textures["menu"] = textura_menu;
+    textures["nixie_tube"] = textura_nixie_tube;
     
     return true;
 }

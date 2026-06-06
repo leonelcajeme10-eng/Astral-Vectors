@@ -2,14 +2,17 @@
 
 #include <SFML/Graphics.hpp>
 #include "Assets.h"
+#include "SistemaPuntuacion.h"
+#include <string>
 struct DatosHUD
 {
+    SistemaPuntuacion sistema;
     int vidaJugador = 80;
     int vidaMaxJugador = 100;
     int vidaBoss = 90;
     int vidaMaxBoss = 100;
-    int puntuacion = 1;
-    float tiempo = 100.f;
+    int puntuacion =0;
+    float tiempo = 0;
     int fase = 1;
 };
 
@@ -17,7 +20,7 @@ class Hud
 {
 public:
 
-    void dibujar(sf::RenderWindow& window, const DatosHUD& datos, const Assets& assets);
+    void dibujar(sf::RenderTarget& window, const DatosHUD& datos, const Assets& assets);
     Hud() = default;
 
 private:
@@ -31,15 +34,20 @@ private:
     float anchoInterno = hudAncho - margen * 2; // 400
    
 
-    void dibujarPanel(sf::RenderWindow& window, const Assets& asset);
-    void dibujarBarraNegra(sf::RenderWindow& window, const Assets& asset, float x, float y, float ancho, float alto);
-    void dibujarVidaJugador(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset);
-    void dibujarVidaBoss(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset);
-    void dibujarPuntuacion(sf::RenderWindow& window, const DatosHUD& datos, const Assets& asset);
-    void dibujarTiempo(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);
-    void dibujarFase(sf::RenderWindow& window, const DatosHUD& datos, sf::Font& fuente);
+    void dibujarPanel(sf::RenderTarget& window, const Assets& asset);
+    void dibujarBarraNegra(sf::RenderTarget& window, const Assets& asset, float x, float y, float ancho, float alto);
+    void dibujarVidaJugador(sf::RenderTarget& window, const DatosHUD& datos, const Assets& asset);
+    void dibujarVidaBoss(sf::RenderTarget& window, const DatosHUD& datos, const Assets& asset);
+    void dibujarPuntuacion(sf::RenderTarget& window, const DatosHUD& datos, const Assets& asset);
+    void dibujarTiempo(sf::RenderTarget& window, const DatosHUD& datos, const Assets& asset);
+    void dibujarFase(sf::RenderTarget& window, const DatosHUD& datos, sf::Font& fuente);
+    void dibujarDecoracionInferior(sf::RenderTarget& window, const Assets& asset);
 
-    void dibujarBarra(sf::RenderWindow& window, float x, float y, float ancho, float alto, float porcentaje) const;
+    void dibujarBarra(sf::RenderTarget& window, float x, float y, float ancho, float alto, float porcentaje) const;
+    void dibujarEtiqueta(sf::RenderTarget& window, const Assets& asset, const std::string& texto, float x, float y, unsigned int tamano) const;
+    void dibujarNixieDigito(sf::RenderTarget& window, const Assets& asset, char digito, float x, float y, float escala) const;
+    void dibujarSeparadorNixie(sf::RenderTarget& window, float x, float y) const;
+    std::string formatearTiempo(float tiempo) const;
 };
 
 
