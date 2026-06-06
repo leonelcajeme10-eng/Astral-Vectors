@@ -19,6 +19,7 @@ protected:
 	sf::Texture textura_corazones;
 	sf::Texture textura_barra_negra;
 	sf::Texture textura_menu;
+	sf::Texture textura_nixie_tube;
 
 public:
 	sf::Music musica_menu;

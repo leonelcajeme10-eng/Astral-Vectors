@@ -11,6 +11,8 @@ class Boss : public Entity
 {
 private:
 	sf::CircleShape shape;
+	sf::Texture textura;
+	bool textura_cargada;
 	int vida;
 	int vida_max;
 	float tiempo_ataque;
@@ -21,6 +23,7 @@ private:
 	int direccionY;
 	bool detenido;
 	float tiempo_detencion;
+	float tiempo_animacion;
 
 public:
 	Boss();

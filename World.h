@@ -26,4 +26,5 @@ public:
 	int getVidaMaxBoss() const;
 	int getFaseBoss() const;
 	int getPuntuacion() const;
+	float get_tiempo() const;
 };

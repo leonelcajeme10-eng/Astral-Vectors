@@ -72,3 +72,9 @@ int World::getPuntuacion() const
 {
 	return sistema_puntuacion.getPuntuacion();
 }
+
+float World::get_tiempo() const
+{
+
+	return sistema_puntuacion.getTiempo();
+}
