@@ -17,12 +17,8 @@ namespace
 	constexpr float MARGEN_CAJA_X = 115.f;
 	constexpr float ALTO_CAJA_DIALOGO = 214.f;
 
-	// Caja un poco mas abajo para que tape mas cuerpo, estilo VN.
 	constexpr float MARGEN_CAJA_INFERIOR = 35.f;
-
-	// Layout recomendado:
-	// Bernkastel grande a la izquierda.
-	// Ange grande a la derecha.
+	
 	const CharacterLayout LAYOUT_BERNKASTEL = { { 560.f, 1045.f }, 930.f };
 	const CharacterLayout LAYOUT_ANGE = { { 1320.f, 1045.f }, 960.f };
 

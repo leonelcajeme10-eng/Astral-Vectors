@@ -117,7 +117,7 @@ bool Assets::cargar_musica()
     }
 
     musica_fase_4.setLooping(true);
-    musica_fase_4.setVolume(40.f);
+    musica_fase_4.setVolume(68.f);
     
 
     return true;

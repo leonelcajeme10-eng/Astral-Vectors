@@ -23,16 +23,16 @@ namespace
 Phase4DialogueScene::Phase4DialogueScene()
 {
 	lineas = {
-		{ "Bernkastel", "Ara... so you managed to reach the fourth layer.", "ange_vn_enojo", "bernkastel_vn_sonrisa", false, true },
-		{ "Ange", "You say that like you already knew I would.", "ange_vn_enojo", "bernkastel_vn_sonrisa", true, false },
-		{ "Bernkastel", "Of course. A board is only interesting when the piece believes it chose the path.", "ange_vn_seria", "bernkastel_vn_cruel", false, true },
-		{ "Ange", "I'm done being treated like a piece.", "ange_vn_desafio", "bernkastel_vn_cruel", true, false },
-		{ "Bernkastel", "How stubborn. Even now, you still think resistance makes you free.", "ange_vn_desafio", "bernkastel_vn_fria", false, true },
-		{ "Ange", "No. I think choosing to stand back up does.", "ange_vn_enojo", "bernkastel_vn_fria", true, false },
-		{ "Bernkastel", "Good. That face suits you better than despair.", "ange_vn_enojo", "bernkastel_vn_sonrisa", false, true },
-		{ "Ange", "You don't get to decide what my despair means.", "ange_vn_desafio", "bernkastel_vn_sonrisa", true, false },
-		{ "Bernkastel", "Then show me, Ange.", "ange_vn_desafio", "bernkastel_vn_cruel", false, true },
-		{ "Bernkastel", "Show me whether your miracle is real... or just another beautiful mistake.", "ange_vn_desafio", "bernkastel_vn_cruel", false, true }
+	{ "Bernkastel", "ha... asi que lograste llegar hasta la cuarta capa.", "ange_vn_enojo", "bernkastel_vn_sonrisa", false, true },
+	{ "Ange", "Lo dices como si ya supieras que iba a llegar.", "ange_vn_enojo", "bernkastel_vn_sonrisa", true, false },
+	{ "Bernkastel", "Por supuesto. Un tablero solo es interesante cuando la pieza cree que eligio el camino.", "ange_vn_seria", "bernkastel_vn_cruel", false, true },
+	{ "Ange", "Ya me canse de que me traten como una pieza.", "ange_vn_desafio", "bernkastel_vn_cruel", true, false },
+	{ "Bernkastel", "Que terca. Incluso ahora sigues creyendo que resistirte te hace libre.", "ange_vn_desafio", "bernkastel_vn_fria", false, true },
+	{ "Ange", "No. Creo que elegir volver a levantarme si lo hace.", "ange_vn_enojo", "bernkastel_vn_fria", true, false },
+	{ "Bernkastel", "Bien. Ese rostro te queda mejor que la desesperacion.", "ange_vn_enojo", "bernkastel_vn_sonrisa", false, true },
+	{ "Ange", "Tu no decides lo que significa mi desesperacion.", "ange_vn_desafio", "bernkastel_vn_sonrisa", true, false },
+	{ "Bernkastel", "Entonces demuestramelo, Ange.", "ange_vn_desafio", "bernkastel_vn_cruel", false, true },
+	{ "Bernkastel", "Muestrame si tu milagro es real... o solo otro hermoso error.", "ange_vn_desafio", "bernkastel_vn_cruel", false, true }
 	};
 }
 
@@ -144,8 +144,7 @@ void Phase4DialogueScene::render(sf::RenderWindow& window)
 	velo.setFillColor(sf::Color(0, 0, 20, 148));
 	window.draw(velo);
 
-	// Los datos guardan Ange como leftSpriteId y Bernkastel como rightSpriteId.
-	// Visualmente, esta escena muestra Bernkastel izquierda y Ange derecha.
+	
 	dibujar_personaje(window, linea.rightSpriteId, linea.rightActive, LAYOUT_BERNKASTEL);
 	dibujar_personaje(window, linea.leftSpriteId, linea.leftActive, LAYOUT_ANGE);
 
