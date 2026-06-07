@@ -7,6 +7,14 @@
 
 bool Assets::cargar_texturas()
 {
+    if (!this->textura_fondo.loadFromFile("assets/images/fondo.png"))
+    {
+        std::cout << "No se pudo cargar assets/images/fondo.png\n";
+        return false;
+    }
+    this->textura_fondo.setSmooth(true);
+    textura_fondo.setRepeated(true);
+
     if (!barra_lateral.loadFromFile("assets/images/panel_lateral.png"))
     {
         std::cout << "No se pudo cargar assets/images/panel_lateral.png\n";
@@ -40,13 +48,7 @@ bool Assets::cargar_texturas()
     }
     this->textura_nixie_tube.setSmooth(true);
 
-    if (!this->textura_fondo.loadFromFile("assets/images/fondo.png"))
-    {
-        std::cout << "No se pudo cargar assets/images/fondo.png\n";
-        return false;
-    }
-    this->textura_fondo.setSmooth(true);
-    textura_fondo.setRepeated(true);
+   
 
 
 
