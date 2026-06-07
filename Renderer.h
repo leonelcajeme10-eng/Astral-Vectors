@@ -19,7 +19,7 @@ public:
 	{
 	}
 
-	void dibujar(sf::RenderWindow& window, World& mundo);
+	void dibujar(sf::RenderWindow& window, World& mundo, float dt);
 	void dibujar_jugador();
 	void dibujar_boss();
 	void dibujar_proyectiles();
