@@ -2,6 +2,7 @@
 #include "Proyectil.h"
 #include <cmath>
 #include <iostream>
+#include <vector>
 
 Player::Player()
 {
@@ -114,10 +115,16 @@ bool Player::canShoot()
 		return true;
 }
 
-Proyectil Player::disparar()
+std::vector<Proyectil> Player::disparar() 
 {
 	cooldown_actual = 0.f; // reinicia el cooldown
-	return Proyectil(posicion, ProjectileOwner::Player);
+	std::vector<Proyectil> disparos;
+
+	disparos.push_back(Proyectil({ posicion.x - 30.f, posicion.y }, ProjectileOwner::Player));
+	disparos.push_back(Proyectil({ posicion.x, posicion.y }, ProjectileOwner::Player));
+	disparos.push_back(Proyectil({ posicion.x + 30.f, posicion.y }, ProjectileOwner::Player));
+
+	return disparos;
 }
 
 float Player::Dash(float dt)

@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Proyectil.h"
+#include <vector>
 
 class Player : public Entity
 {
@@ -25,7 +26,7 @@ public:
 	void update(float dt) override;
 	void render(sf::RenderWindow& ventana) override;
 	bool canShoot(); //indica si ya puede disparar xd
-	Proyectil disparar();
+	std::vector<Proyectil> disparar();
 	float Dash(float dt);
 	void recibir_danio(int danio);
 	int getVida() const { return vida; };

@@ -14,7 +14,14 @@ void World::update(float dt)
 	jefe.update(dt);
 	sistema_puntuacion.update(dt);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && (jugador.canShoot()))
-		proyectiles.push_back(Proyectil(jugador.disparar())); // el jugador dispara, devuelve un proyectil al vector de proyectiles
+	{
+		std::vector<Proyectil> proyectilesJugador = jugador.disparar();
+
+		for (auto& proyectil :proyectilesJugador)
+		{
+			proyectiles.push_back(proyectil);
+		}
+	}
 
 	if (cooldownInicialBoss)
 	{

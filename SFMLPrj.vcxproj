@@ -151,6 +151,7 @@ if exist "$(ProjectDir)sfml-*-3.dll" copy /Y "$(ProjectDir)sfml-*-3.dll" "$(OutD
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="PatronAbanico.cpp" />
     <ClCompile Include="PatronCircular.cpp" />
+    <ClCompile Include="PatronEspiral.cpp" />
     <ClCompile Include="PatronRecto.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Proyectil.cpp" />
@@ -169,6 +170,7 @@ if exist "$(ProjectDir)sfml-*-3.dll" copy /Y "$(ProjectDir)sfml-*-3.dll" "$(OutD
     <ClInclude Include="PatronAbanico.h" />
     <ClInclude Include="PatronAtaque.h" />
     <ClInclude Include="PatronCircular.h" />
+    <ClInclude Include="PatronEspiral.h" />
     <ClInclude Include="PatronRecto.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Proyectil.h" />
