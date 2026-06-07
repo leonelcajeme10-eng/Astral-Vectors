@@ -16,7 +16,7 @@ Boss::Boss()
 	tiempo_detencion = 0.f;
 	detenido = false;
 	tiempo_animacion = 0.f;
-	textura_cargada = textura.loadFromFile("assets/images/boss_sprite.png");
+	textura_cargada = textura.loadFromFile("assets/images/bernkastel.png");
 
 	if (textura_cargada)
 	{

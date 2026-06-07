@@ -8,15 +8,17 @@
 #include "SistemaPuntuacion.h"
 
 
-void Hud::dibujar(sf::RenderTarget& window, const DatosHUD& datos, const Assets& asset)
+void Hud::dibujar(sf::RenderTarget& window, const DatosHUD& datos, const Assets& asset,float dt)
 {	
 
+    
     this->dibujarPanel(window,asset);
     dibujarPuntuacion(window, datos, asset);
 	dibujarVidaJugador(window,datos, asset);
     dibujarVidaBoss(window, datos, asset);
     dibujarTiempo(window, datos, asset);
     dibujarDecoracionInferior(window, asset);
+    dibujar_fondo(window, asset, dt);
 }
 
 void Hud::dibujarPanel(sf::RenderTarget& window, const Assets& asset)
@@ -252,6 +254,32 @@ void Hud::dibujarDecoracionInferior(sf::RenderTarget& window, const Assets& asse
     estado.setFillColor(sf::Color(235, 225, 200, 90));
     estado.setPosition({ x + 24.f, y + 132.f });
     window.draw(estado);
+}
+
+void Hud::dibujar_fondo(sf::RenderTarget& window, const Assets& asset ,float dt)
+{
+   
+
+    const sf::Texture& fondo = asset.get_texture("fondo");
+    
+    
+    sf::Sprite fondo_sprite(fondo);
+
+    const float velocidad_scroll = 100.0f;
+     scroll_y += velocidad_scroll * dt;
+ 
+
+    sf::IntRect texture_rect({ 0,static_cast<int>(scroll_y)}, { 1440, 1080 });
+    fondo_sprite.setTextureRect(texture_rect);
+
+    fondo_sprite.setTextureRect(texture_rect);
+    fondo_sprite.setPosition({ 0.f, 0.f });
+
+    window.draw(fondo_sprite);
+
+    
+
+
 }
 
 void Hud::dibujarBarra(sf::RenderTarget& window, float x, float y, float ancho, float alto, float porcentaje) const

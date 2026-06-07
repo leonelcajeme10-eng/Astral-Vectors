@@ -20,7 +20,7 @@ class Hud
 {
 public:
 
-    void dibujar(sf::RenderTarget& window, const DatosHUD& datos, const Assets& assets);
+    void dibujar(sf::RenderTarget& window, const DatosHUD& datos, const Assets& assets, float dt);
     Hud() = default;
 
 private:
@@ -32,6 +32,7 @@ private:
     const float margen = 40.f;
     float xTexto = hudX + margen; // 1480
     float anchoInterno = hudAncho - margen * 2; // 400
+    float scroll_y = 0.f;
    
 
     void dibujarPanel(sf::RenderTarget& window, const Assets& asset);
@@ -42,6 +43,7 @@ private:
     void dibujarTiempo(sf::RenderTarget& window, const DatosHUD& datos, const Assets& asset);
     void dibujarFase(sf::RenderTarget& window, const DatosHUD& datos, sf::Font& fuente);
     void dibujarDecoracionInferior(sf::RenderTarget& window, const Assets& asset);
+    void dibujar_fondo(sf::RenderTarget& window, const Assets& asset,float dt);
 
     void dibujarBarra(sf::RenderTarget& window, float x, float y, float ancho, float alto, float porcentaje) const;
     void dibujarEtiqueta(sf::RenderTarget& window, const Assets& asset, const std::string& texto, float x, float y, unsigned int tamano) const;
