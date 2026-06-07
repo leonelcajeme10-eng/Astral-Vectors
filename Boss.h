@@ -5,6 +5,7 @@
 #include "PatronRecto.h"
 #include "PatronAbanico.h"
 #include "PatronCircular.h"
+#include "PatronEspiral.h"
 #include <vector>
 
 class Boss : public Entity
@@ -24,6 +25,7 @@ private:
 	bool detenido;
 	float tiempo_detencion;
 	float tiempo_animacion;
+	float tiempo_dash;
 
 public:
 	Boss();

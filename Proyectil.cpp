@@ -11,7 +11,7 @@ Proyectil::Proyectil(sf::Vector2f posicionOrigen, ProjectileOwner propietarioOri
 		radio = 7;
 		velocidad = 700.f;
 		shape.setFillColor(sf::Color::Cyan);
-		danio = 10;
+		danio = 2;
 	}
 	else
 	{

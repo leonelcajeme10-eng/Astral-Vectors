@@ -1,9 +1,10 @@
 #include "Boss.h"
 #include <iostream>
+#include <ctime>
 
 Boss::Boss()
 {
-	vida_max = 200;
+	vida_max = 600;
 	vida = vida_max;
 	tiempo_ataque = 0.8f;
 	patron_actual = 1;
@@ -16,6 +17,8 @@ Boss::Boss()
 	tiempo_detencion = 0.f;
 	detenido = false;
 	tiempo_animacion = 0.f;
+	textura_cargada = textura.loadFromFile("assets/images/boss_sprite.png");
+	tiempo_dash = 0.f;
 	textura_cargada = textura.loadFromFile("assets/images/bernkastel.png");
 
 	if (textura_cargada)
@@ -88,7 +91,20 @@ void Boss::update(float dt)
 				return;
 			}
 
-			posicion.x += velocidad * direccion * dt; //calcula la posicion
+			if (tiempo_dash <= 0.f && std::rand() % 40 == 0)
+			{
+				tiempo_dash = 0.45f; 
+			}
+
+			float multiplicador_velocidad = 1.f;
+
+			if (tiempo_dash > 0.f)
+			{
+				multiplicador_velocidad = 2.2f;
+				tiempo_dash -= dt;
+			}
+
+			posicion.x += velocidad * multiplicador_velocidad * direccion * dt;
 
 			//Esto hace que se mueva hacia la izquierda o la derecha
 			if (posicion.x > 1220.f)
@@ -108,7 +124,50 @@ void Boss::update(float dt)
 			{
 				tiempo_detencion += dt;
 
-				if (tiempo_detencion >= 0.15f)
+				if (tiempo_detencion >= 0.25f)
+				{
+					detenido = false;
+					tiempo_detencion = 0.f;
+				}
+
+				shape.setPosition(posicion);
+				return;
+			}
+
+			float velocidadX = 360.f;
+			float velocidadY = 160.f;
+
+			posicion.x += velocidadX * direccion * dt;
+			posicion.y += velocidadY * direccionY * dt;
+
+			if (posicion.x > 1220.f)
+			{
+				direccion = -1;
+			}
+
+			if (posicion.x < 200.f)
+			{
+				direccion = 1;
+			}
+
+			if (posicion.y > 260.f)
+			{
+				direccionY = -1;
+			}
+
+			if (posicion.y < 80.f)
+			{
+				direccionY = 1;
+			}
+		}
+
+		if (fase == 4)
+		{
+			if (detenido)
+			{
+				tiempo_detencion += dt;
+
+				if (tiempo_detencion >= 0.20f)
 				{
 					detenido = false;
 					tiempo_detencion = 0.f;
@@ -191,7 +250,7 @@ std::vector<Proyectil> Boss::atacar()
 
 	if (fase == 2)
 	{
-		if (!detenido && tiempo_ataque >= 0.75f) // si no esta detenido y ya es tiempo de atacar, genera proyectiles
+		if (!detenido && tiempo_ataque >= 0.70f) // si no esta detenido y ya es tiempo de atacar, genera proyectiles
 		{
 			PatronAbanico patron;
 			proyectiles = patron.generar(posicion); // genera los 6 proyectiles del patron recto
@@ -204,14 +263,25 @@ std::vector<Proyectil> Boss::atacar()
 
 	if (fase == 3)
 	{
-		if (!detenido && tiempo_ataque >= 0.65f) // si no esta detenido y ya es tiempo de atacar, genera proyectiles
+		if (!detenido && tiempo_ataque >= 0.60f) // si no esta detenido y ya es tiempo de atacar, genera proyectiles
 		{
-			PatronCircular patron;
+			static PatronCircular patron;
 			proyectiles = patron.generar(posicion); // genera los proyectiles del patron circular
 
 			tiempo_ataque = 0.f;
 			detenido = true;
 			tiempo_detencion = 0.f;
+		}
+	}
+
+	if (fase == 4)
+	{
+		if (tiempo_ataque >= 0.07f)
+		{
+			static PatronEspiral patron;
+			proyectiles = patron.generar(posicion);
+
+			tiempo_ataque = 0.f;
 		}
 	}
 	return proyectiles; 
@@ -229,9 +299,11 @@ void Boss::recibir_danio(int danio)
 
 void Boss::cambiar_fase()
 {
-	if (vida <= vida_max * 0.35f)
+	if (vida <= vida_max * 0.25f)
+		fase = 4;
+	else if (vida <= vida_max * 0.50f)
 		fase = 3;
-	else if (vida <= vida_max * 0.70f)
+	else if (vida <= vida_max * 0.75f)
 		fase = 2;
 	else
 		fase = 1;
