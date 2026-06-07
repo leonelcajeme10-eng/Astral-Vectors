@@ -4,7 +4,7 @@
 
 Boss::Boss()
 {
-	vida_max = 800;
+	vida_max = 600;
 	vida = vida_max;
 	tiempo_ataque = 0.8f;
 	patron_actual = 1;
