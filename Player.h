@@ -24,7 +24,7 @@ public:
 	Player();
 
 	void update(float dt) override;
-	void render(sf::RenderWindow& ventana) override;
+	void render(sf::RenderTarget& ventana) override;
 	bool canShoot(); //indica si ya puede disparar xd
 	std::vector<Proyectil> disparar();
 	float Dash(float dt);

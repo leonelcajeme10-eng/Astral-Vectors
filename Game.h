@@ -4,11 +4,17 @@
 #include "World.h"
 #include "Renderer.h"
 #include "menu.h"
+#include "Pausa.h"
+#include "BossIntroScene.h"
+#include "Phase4DialogueScene.h"
 #include <SFML/Audio.hpp>
 
 enum class  GameState {
 	Menu_estado,
+	BossIntro,
 	Playing,
+	Phase4Dialogue,
+	Pause,
 	Victory,
 	GameOver,
 };
@@ -22,8 +28,14 @@ private:
 	World world;
 	Assets assets;
 	menu menu_principal;
+	Pausa pantalla_pausa;
+	BossIntroScene intro_boss;
+	Phase4DialogueScene dialogo_fase_4;
 	Hud hud;
 	Renderer render;
+	bool fase4DialogoMostrado = false;
+
+	void actualizar_musica(int fase);
 
 
 public:

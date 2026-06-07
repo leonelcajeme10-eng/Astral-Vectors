@@ -7,6 +7,56 @@
 Game::Game() : ventana(sf::VideoMode({ 1920, 1080 }), "Astral Vectors"), assets(), hud(), render(assets, hud) , menu_principal ()
 {
 	ventana.setFramerateLimit(60);
+	ventana.setKeyRepeatEnabled(false);
+}
+
+void Game::actualizar_musica(int fase)
+{
+	if (estado == GameState::Menu_estado)
+	{
+		assets.musica_fase_1.stop();
+		assets.musica_fase_4.stop();
+
+		if (assets.musica_menu.getStatus() != sf::SoundSource::Status::Playing)
+		{
+			assets.musica_menu.play();
+		}
+
+		return;
+	}
+
+	assets.musica_menu.stop();
+
+	if (estado == GameState::Pause || estado == GameState::Phase4Dialogue)
+	{
+		return;
+	}
+
+	if (estado != GameState::Playing)
+	{
+		assets.musica_fase_1.stop();
+		assets.musica_fase_4.stop();
+		return;
+	}
+
+	if (fase == 4)
+	{
+		assets.musica_fase_1.stop();
+
+		if (assets.musica_fase_4.getStatus() != sf::SoundSource::Status::Playing)
+		{
+			assets.musica_fase_4.play();
+		}
+
+		return;
+	}
+
+	assets.musica_fase_4.stop();
+
+	if (assets.musica_fase_1.getStatus() != sf::SoundSource::Status::Playing)
+	{
+		assets.musica_fase_1.play();
+	}
 }
 
 void Game::run()
@@ -25,11 +75,27 @@ void Game::run()
 		return;
 	}
 
+	if (!intro_boss.load(assets))
+	{
+		cout << "\n error al cargar intro boss";
+		return;
+	}
+
+	if (!dialogo_fase_4.load(assets))
+	{
+		cout << "\n error al cargar dialogo fase 4";
+		return;
+	}
+
 	if (!assets.cargar_musica())
 	{
 		cout << "\n error al cargar musica";
 		return;
 	}
+
+	sf::RenderTexture escena_pausa({ 480, 270 });
+	escena_pausa.setSmooth(true);
+	escena_pausa.setView(sf::View({ 960.f, 540.f }, { 1920.f, 1080.f }));
 
 	while (ventana.isOpen())
 	{
@@ -49,9 +115,59 @@ void Game::run()
 				ventana.close();
 			}
 
-			if (estado_anterior == GameState::Menu_estado && estado == GameState::Playing)
+			if (estado_anterior == GameState::BossIntro)
 			{
-				assets.musica_menu.stop();
+				intro_boss.handleEvent(*evento);
+			}
+
+			if (estado_anterior == GameState::Phase4Dialogue)
+			{
+				dialogo_fase_4.handleEvent(*evento);
+			}
+
+			if (const auto* tecla = evento->getIf<sf::Event::KeyPressed>())
+			{
+				if (estado == GameState::Playing &&
+					(tecla->code == sf::Keyboard::Key::P || tecla->code == sf::Keyboard::Key::Escape))
+				{
+					estado = GameState::Pause;
+				}
+			}
+
+			if (estado_anterior == GameState::Pause)
+			{
+				pantalla_pausa.manejar_evento(*evento, estado);
+			}
+
+			if (estado_anterior != estado && estado == GameState::BossIntro)
+			{
+				intro_boss.reset();
+			}
+
+		}
+
+		bool intro_terminada_este_frame = false;
+		bool dialogo_fase_4_terminado_este_frame = false;
+
+		if (estado == GameState::BossIntro)
+		{
+			intro_boss.update(dt);
+
+			if (intro_boss.isFinished())
+			{
+				estado = GameState::Playing;
+				intro_terminada_este_frame = true;
+			}
+		}
+
+		if (estado == GameState::Phase4Dialogue)
+		{
+			dialogo_fase_4.update(dt);
+
+			if (dialogo_fase_4.isFinished())
+			{
+				estado = GameState::Playing;
+				dialogo_fase_4_terminado_este_frame = true;
 			}
 		}
 
@@ -59,13 +175,54 @@ void Game::run()
 
 		if (this->estado == GameState::Menu_estado)
 		{
+			
 			menu_principal.dibujar(ventana, assets);
+		}
+		else if (this->estado == GameState::BossIntro)
+		{
+			intro_boss.render(ventana);
 		}
 		else if (this->estado == GameState::Playing) 
 		{
-			world.update(dt);
-			this->render.dibujar(ventana, world, dt);
+			if (!intro_terminada_este_frame && !dialogo_fase_4_terminado_este_frame)
+			{
+				world.update(dt);
+
+				if (!fase4DialogoMostrado && world.getFaseBoss() == 4)
+				{
+					fase4DialogoMostrado = true;
+					dialogo_fase_4.reset();
+					estado = GameState::Phase4Dialogue;
+				}
+			}
+
+			this->render.dibujar(
+				ventana,
+				world,
+				estado == GameState::Phase4Dialogue ? 0.f : dt
+			);
+
+			if (estado == GameState::Phase4Dialogue)
+			{
+				dialogo_fase_4.render(ventana);
+			}
 		}
+		else if (this->estado == GameState::Phase4Dialogue)
+		{
+			this->render.dibujar(ventana, world, 0.f);
+			dialogo_fase_4.render(ventana);
+		}
+		else if (this->estado == GameState::Pause)
+		{
+			escena_pausa.clear();
+			this->render.dibujar(escena_pausa, world, 0.f);
+			escena_pausa.display();
+
+			pantalla_pausa.dibujar(ventana, assets, escena_pausa.getTexture());
+		}
+
+		actualizar_musica(world.getFaseBoss());
+
 		ventana.display();
 	}
 };

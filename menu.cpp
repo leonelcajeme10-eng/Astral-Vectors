@@ -46,7 +46,7 @@ bool menu::manejar_evento(const sf::Event& evento, GameState& estado)
 	{
 		if (opcion == 0)
 		{
-			estado = GameState::Playing;
+			estado = GameState::BossIntro;
 		}
 		else if (opcion == 1)
 		{

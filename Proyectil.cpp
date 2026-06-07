@@ -67,7 +67,7 @@ void Proyectil::update(float dt)
 	posicion += direccion * velocidad * dt;
 	shape.setPosition(posicion);
 }
-void Proyectil::render(sf::RenderWindow& ventana)
+void Proyectil::render(sf::RenderTarget& ventana)
 {
 	ventana.draw(shape);
 };
