@@ -64,10 +64,7 @@ void Game::run()
 		else if (this->estado == GameState::Playing) 
 		{
 			world.update(dt);
-			
-			this->render.dibujar(ventana, world,dt);
-
-			world.render(ventana);
+			this->render.dibujar(ventana, world, dt);
 		}
 		ventana.display();
 	}

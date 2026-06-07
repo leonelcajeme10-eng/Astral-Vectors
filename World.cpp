@@ -60,16 +60,20 @@ void World::update(float dt)
 	sistema_colisiones.verificar_colisiones(jugador, jefe, proyectiles, dt, sistema_puntuacion);
 }
 
-void World::render(sf::RenderWindow& ventana)
+Player& World::getJugador()
 {
-	jugador.render(ventana); // renderiza al jugador
-	jefe.render(ventana);
+	return jugador;
+}
 
-	for (auto& proyectil : proyectiles) //renderiza todos los proyectiles del vector 
-	{
-		proyectil.render(ventana);
-	}
-};
+Boss& World::getBoss()
+{
+	return jefe;
+}
+
+std::vector<Proyectil>& World::getProyectiles()
+{
+	return proyectiles;
+}
 
 int World::getVidaJugador() const
 {
