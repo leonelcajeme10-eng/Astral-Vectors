@@ -34,11 +34,14 @@ void World::update(float dt)
 	}
 	else
 	{
-		std::vector<Proyectil> proyectilesJefe = jefe.atacar();
-
-		for (auto& proyectil : proyectilesJefe) // recorre los proyectiles jefe y los mete a los totales
+		if (jefe.getVida() > 0)
 		{
-			proyectiles.push_back(proyectil);
+			std::vector<Proyectil> proyectilesJefe = jefe.atacar();
+
+			for (auto& proyectil : proyectilesJefe) // recorre los proyectiles jefe y los mete a los totales
+			{
+				proyectiles.push_back(proyectil);
+			}
 		}
 	}
 
