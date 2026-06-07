@@ -156,7 +156,7 @@ void BossIntroScene::render(sf::RenderWindow& window)
 
 	const sf::View vista_anterior = window.getView();
 
-	// Vista logica fija 1920x1080 para que no se rompa en fullscreen/windowed.
+
 	sf::View vista_vn(sf::FloatRect({ 0.f, 0.f }, { ANCHO_BASE, ALTO_BASE }));
 	window.setView(vista_vn);
 
@@ -168,9 +168,7 @@ void BossIntroScene::render(sf::RenderWindow& window)
 	velo.setFillColor(sf::Color(0, 0, 18, 34));
 	window.draw(velo);
 
-	// IMPORTANTE:
-	// En tus lineas, leftSpriteId suele ser Ange y rightSpriteId suele ser Bernkastel.
-	// Pero visualmente queremos Bernkastel izquierda y Ange derecha.
+	
 	dibujar_personaje(window, linea.rightSpriteId, linea.rightActive, LAYOUT_BERNKASTEL);
 	dibujar_personaje(window, linea.leftSpriteId, linea.leftActive, LAYOUT_ANGE);
 
