@@ -22,7 +22,7 @@ public:
 	void update(float dt);
 	int getDanio() { return danio; };
 	ProjectileOwner getPropietario() { return propietario; };
-	void render(sf::RenderWindow& ventana) override;
+	void render(sf::RenderTarget& ventana) override;
 	float getPosicionY() { return posicion.y; };
 	float getPosicionX() { return posicion.x; };
 	sf::Vector2f getPosicion() { return posicion; }

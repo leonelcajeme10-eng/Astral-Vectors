@@ -84,7 +84,7 @@ void Player::update(float dt)
 	cooldown_actual += dt; // actualiza el cooldown del pana disparo
 };
 
-void Player::render(sf::RenderWindow& ventana)
+void Player::render(sf::RenderTarget& ventana)
 {
 	if (textura_cargada)
 	{

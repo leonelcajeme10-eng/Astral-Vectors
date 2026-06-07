@@ -24,6 +24,8 @@ protected:
 
 public:
 	sf::Music musica_menu;
+	sf::Music musica_fase_1;
+	sf::Music musica_fase_4;
 	Assets() = default;
 
 	bool cargar_texturas(); 

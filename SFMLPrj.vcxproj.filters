@@ -45,6 +45,9 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BossIntroScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="SistemaColisiones.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,6 +64,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PatronEspiral.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pausa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Phase4DialogueScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -81,6 +90,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Boss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossIntroScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PatronAtaque.h">
@@ -114,6 +126,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PatronEspiral.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pausa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Phase4DialogueScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

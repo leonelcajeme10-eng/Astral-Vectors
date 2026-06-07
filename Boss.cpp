@@ -208,7 +208,7 @@ void Boss::update(float dt)
 	shape.setPosition(posicion);
 }
 
-void Boss::render(sf::RenderWindow& ventana)
+void Boss::render(sf::RenderTarget& ventana)
 {
 	if (textura_cargada)
 	{

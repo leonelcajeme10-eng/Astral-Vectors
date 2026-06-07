@@ -145,10 +145,13 @@ if exist "$(ProjectDir)sfml-*-3.dll" copy /Y "$(ProjectDir)sfml-*-3.dll" "$(OutD
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossIntroScene.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="Pausa.cpp" />
+    <ClCompile Include="Phase4DialogueScene.cpp" />
     <ClCompile Include="PatronAbanico.cpp" />
     <ClCompile Include="PatronCircular.cpp" />
     <ClCompile Include="PatronEspiral.cpp" />
@@ -163,10 +166,13 @@ if exist "$(ProjectDir)sfml-*-3.dll" copy /Y "$(ProjectDir)sfml-*-3.dll" "$(OutD
   <ItemGroup>
     <ClInclude Include="Assets.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossIntroScene.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Hud.h" />
     <ClInclude Include="menu.h" />
+    <ClInclude Include="Pausa.h" />
+    <ClInclude Include="Phase4DialogueScene.h" />
     <ClInclude Include="PatronAbanico.h" />
     <ClInclude Include="PatronAtaque.h" />
     <ClInclude Include="PatronCircular.h" />

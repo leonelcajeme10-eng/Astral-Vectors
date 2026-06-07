@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "SistemaPuntuacion.h"
 
-void Renderer::dibujar(sf::RenderWindow& window, World& mundo, float dt)
+void Renderer::dibujar(sf::RenderTarget& window, World& mundo, float dt)
 {
 	
 
@@ -22,17 +22,17 @@ void Renderer::dibujar(sf::RenderWindow& window, World& mundo, float dt)
 	dibujar_proyectiles(window, mundo);
 }
 
-void Renderer::dibujar_jugador(sf::RenderWindow& window, World& mundo)
+void Renderer::dibujar_jugador(sf::RenderTarget& window, World& mundo)
 {
 	mundo.getJugador().render(window);
 }
 
-void Renderer::dibujar_boss(sf::RenderWindow& window, World& mundo)
+void Renderer::dibujar_boss(sf::RenderTarget& window, World& mundo)
 {
 	mundo.getBoss().render(window);
 }
 
-void Renderer::dibujar_proyectiles(sf::RenderWindow& window, World& mundo)
+void Renderer::dibujar_proyectiles(sf::RenderTarget& window, World& mundo)
 {
 	for (auto& proyectil : mundo.getProyectiles())
 	{

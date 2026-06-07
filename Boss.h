@@ -30,7 +30,7 @@ private:
 public:
 	Boss();
 	void update(float dt) override;
-	void render(sf::RenderWindow& ventana) override;
+	void render(sf::RenderTarget& ventana) override;
 	std::vector<Proyectil> atacar();
 	void recibir_danio(int danio);
 	void cambiar_fase();
