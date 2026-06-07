@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "SistemaPuntuacion.h"
 
-void Renderer::dibujar(sf::RenderWindow& window, World& mundo)
+void Renderer::dibujar(sf::RenderWindow& window, World& mundo,float dt)
 {
 	DatosHUD datos;
 	datos.puntuacion = mundo.getPuntuacion();
@@ -16,13 +16,14 @@ void Renderer::dibujar(sf::RenderWindow& window, World& mundo)
 	
 
 	
-	hud.dibujar(window,datos,assets_manager);
+	hud.dibujar(window,datos,assets_manager, dt);
 
 	
 }
 
 void Renderer::dibujar_jugador()
 {
+
 
 }
 
