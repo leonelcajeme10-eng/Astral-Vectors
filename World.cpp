@@ -49,7 +49,8 @@ void World::update(float dt)
 	{
 		proyectiles[i].update(dt); //actualiza todos los proyectiles del vector 
 
-		if (proyectiles[i].getPosicionY() < -50.f || proyectiles[i].getPosicionY() > 1030.f)
+		if (proyectiles[i].getPosicionY() < -50.f || proyectiles[i].getPosicionY() > 1030.f || proyectiles[i].getPosicionX() < -50.f 
+			|| proyectiles[i].getPosicionX() > 1440.f)
 		{
 			proyectiles.erase(proyectiles.begin() + i); // si el proyectil sale de la pantalla lo borra
 			i--; // reajusta el vector pana
