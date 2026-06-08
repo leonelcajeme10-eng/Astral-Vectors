@@ -25,7 +25,7 @@ std::vector<Proyectil> PatronEspiral::generar(sf::Vector2f posicionBoss)
         proyectiles.push_back(Proyectil(posicionBoss, ProjectileOwner::Enemy, direccion));
     }
 
-    angulo_offset += 0.15f; // velocidad de rotacion de la espiral
+    angulo_offset += 0.12f; // velocidad de rotacion de la espiral
 
     if (angulo_offset >= 2 * pi)
         angulo_offset -= 2 * pi;
