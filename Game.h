@@ -17,6 +17,7 @@ enum class  GameState {
 	Pause,
 	Victory,
 	GameOver,
+	Win,
 };
 
 class Game
@@ -36,6 +37,7 @@ private:
 	bool fase4DialogoMostrado = false;
 
 	void actualizar_musica(int fase);
+	void actualizar_sonidos();
 
 
 public:

@@ -10,6 +10,8 @@ Game::Game() : ventana(sf::VideoMode({ 1920, 1080 }), "Astral Vectors"), assets(
 	ventana.setKeyRepeatEnabled(false);
 }
 
+
+
 void Game::actualizar_musica(int fase)
 {
 	if (estado == GameState::Menu_estado)
@@ -59,6 +61,11 @@ void Game::actualizar_musica(int fase)
 	}
 }
 
+void Game::actualizar_sonidos()
+{
+
+}
+
 void Game::run()
 {
 	sf::Clock clock;
@@ -93,6 +100,12 @@ void Game::run()
 		return;
 	}
 
+	if (!assets.cargar_sonido())
+	{
+		cout << "\n error al cargar sonidos";
+		return;
+	}
+
 	sf::RenderTexture escena_pausa({ 480, 270 });
 	escena_pausa.setSmooth(true);
 	escena_pausa.setView(sf::View({ 960.f, 540.f }, { 1920.f, 1080.f }));
@@ -110,40 +123,45 @@ void Game::run()
 				ventana.close();
 			}
 
-			if (this->estado == GameState::Menu_estado && menu_principal.manejar_evento(*evento, estado))
+			switch (estado)
 			{
-				ventana.close();
-			}
-
-			if (estado_anterior == GameState::BossIntro)
+			case GameState::Menu_estado:
 			{
-				intro_boss.handleEvent(*evento);
-			}
-
-			if (estado_anterior == GameState::Phase4Dialogue)
-			{
-				dialogo_fase_4.handleEvent(*evento);
-			}
-
-			if (const auto* tecla = evento->getIf<sf::Event::KeyPressed>())
-			{
-				if (estado == GameState::Playing &&
-					(tecla->code == sf::Keyboard::Key::P || tecla->code == sf::Keyboard::Key::Escape))
+				if (menu_principal.manejar_evento(*evento, estado))
 				{
-					estado = GameState::Pause;
+					ventana.close();
 				}
+				break;
 			}
 
-			if (estado_anterior == GameState::Pause)
-			{
+			case GameState::Playing:
+
+				if (const auto* tecla = evento->getIf<sf::Event::KeyPressed>())
+				{
+					if (estado == GameState::Playing && (tecla->code == sf::Keyboard::Key::P || tecla->code == sf::Keyboard::Key::Escape))
+					{
+						estado = GameState::Pause;
+					}
+				}
+				break;
+			case GameState::BossIntro:
+				intro_boss.handleEvent(*evento);
+				break;
+
+			case GameState::Phase4Dialogue:
+				dialogo_fase_4.handleEvent(*evento);
+				break;
+
+			case GameState::Pause:
 				pantalla_pausa.manejar_evento(*evento, estado);
+				break;
 			}
 
 			if (estado_anterior != estado && estado == GameState::BossIntro)
 			{
 				intro_boss.reset();
 			}
-
+			
 		}
 
 		bool intro_terminada_este_frame = false;
@@ -186,7 +204,7 @@ void Game::run()
 		{
 			if (!intro_terminada_este_frame && !dialogo_fase_4_terminado_este_frame)
 			{
-				world.update(dt);
+				world.update(dt,assets);
 
 				if (!fase4DialogoMostrado && world.getFaseBoss() == 4)
 				{
@@ -196,11 +214,7 @@ void Game::run()
 				}
 			}
 
-			this->render.dibujar(
-				ventana,
-				world,
-				estado == GameState::Phase4Dialogue ? 0.f : dt
-			);
+			this->render.dibujar(ventana,world,estado == GameState::Phase4Dialogue ? 0.f : dt);
 
 			if (estado == GameState::Phase4Dialogue)
 			{
@@ -225,4 +239,4 @@ void Game::run()
 
 		ventana.display();
 	}
-};
+}

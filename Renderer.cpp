@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "SistemaPuntuacion.h"
 
+#include "Assets.h"
+
 void Renderer::dibujar(sf::RenderTarget& window, World& mundo, float dt)
 {
 	
@@ -38,4 +40,6 @@ void Renderer::dibujar_proyectiles(sf::RenderTarget& window, World& mundo)
 	{
 		proyectil.render(window);
 	}
+	
+
 }

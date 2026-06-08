@@ -1,8 +1,9 @@
 #include "Assets.h"
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 #include <iostream>
 
-
+using namespace std;
 
 
 bool Assets::cargar_texturas()
@@ -121,6 +122,45 @@ bool Assets::cargar_musica()
     
 
     return true;
+}
+
+bool Assets::cargar_sonido()
+{
+    map<string, string> mapa_sonidos = { {"disparo" ,"assets/Sounds/disparo.ogg"} , {"disparo_boss","assets/Sounds/disparo_boss.ogg"} };
+
+    for (const auto& [nombre, ruta] : mapa_sonidos)
+    {
+        if (!sound_buffers[nombre].loadFromFile(ruta))
+        {
+            cout << "Error al cargar " << ruta << endl;
+            return false;
+        }
+
+    }
+
+
+    return true;
+}
+
+void Assets::reproducir_sfx(const string& nombre)
+{
+    
+    sonidos_activos.erase(std::remove_if(sonidos_activos.begin(), sonidos_activos.end(),[](const sf::Sound& s) { return s.getStatus() == sf::SoundSource::Status::Stopped; }),sonidos_activos.end());
+
+   
+    auto it = sound_buffers.find(nombre);
+    if (it != sound_buffers.end())
+    {
+        sf::Sound nuevo_sonido(it->second);
+
+        float pitch_aleatorio = 0.80f + (rand() % 10) / 100.f;
+        nuevo_sonido.setPitch(pitch_aleatorio);
+
+        sonidos_activos.emplace_back(move(nuevo_sonido));
+        sonidos_activos.back().setVolume(10.f);
+      
+        sonidos_activos.back().play();
+    }
 }
 
 const sf::Texture& Assets::get_texture(const string& nombre) const
