@@ -1,8 +1,9 @@
 #include "Assets.h"
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 #include <iostream>
 
-
+using namespace std;
 
 
 bool Assets::cargar_texturas()
@@ -48,6 +49,20 @@ bool Assets::cargar_texturas()
     }
     this->textura_nixie_tube.setSmooth(true);
 
+    if (!this->textura_bala_roja.loadFromFile("assets/images/bala_roja.png"))
+    {
+        std::cout << "No se pudo cargar assets/images/bala_roja.png\n";
+        return false;
+    }
+    this->textura_bala_roja.setSmooth(true);
+
+    if (!this->textura_bala_morada.loadFromFile("assets/images/bala_morada.png"))
+    {
+        std::cout << "No se pudo cargar assets/images/bala_morada.png\n";
+        return false;
+    }
+    this->textura_bala_morada.setSmooth(true);
+
    
 
 
@@ -58,6 +73,8 @@ bool Assets::cargar_texturas()
     textures["menu"] = textura_menu;
     textures["nixie_tube"] = textura_nixie_tube;
     textures["fondo"] = textura_fondo;
+    textures["bala_roja"] = textura_bala_roja;
+    textures["bala_morada"] = textura_bala_morada;
 
     auto cargar_textura_vn = [this](const string& nombre, const string& ruta)
         {
@@ -117,10 +134,47 @@ bool Assets::cargar_musica()
     }
 
     musica_fase_4.setLooping(true);
-    musica_fase_4.setVolume(68.f);
+    musica_fase_4.setVolume(75.f);
     
 
     return true;
+}
+
+bool Assets::cargar_sonido()
+{
+    map<string, string> mapa_sonidos = { {"disparo" ,"assets/Sounds/disparo.ogg"} , {"disparo_boss","assets/Sounds/disparo_boss.ogg"} , {"risa","assets/Music/risa.ogg"} };
+
+    for (const auto& [nombre, ruta] : mapa_sonidos)
+    {
+        if (!sound_buffers[nombre].loadFromFile(ruta))
+        {
+            cout << "Error al cargar " << ruta << endl;
+            return false;
+        }
+
+    }
+    return true;
+}
+
+void Assets::reproducir_sfx(const string& nombre)
+{
+    
+    sonidos_activos.erase(std::remove_if(sonidos_activos.begin(), sonidos_activos.end(),[](const sf::Sound& s) { return s.getStatus() == sf::SoundSource::Status::Stopped; }),sonidos_activos.end());
+
+   
+    auto it = sound_buffers.find(nombre);
+    if (it != sound_buffers.end())
+    {
+        sf::Sound nuevo_sonido(it->second);
+
+        float pitch_aleatorio = 0.90f + (rand() % 10) / 100.f;
+        nuevo_sonido.setPitch(pitch_aleatorio);
+
+        sonidos_activos.emplace_back(move(nuevo_sonido));
+        sonidos_activos.back().setVolume(15.f);
+      
+        sonidos_activos.back().play();
+    }
 }
 
 const sf::Texture& Assets::get_texture(const string& nombre) const

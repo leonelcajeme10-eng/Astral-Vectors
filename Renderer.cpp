@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "SistemaPuntuacion.h"
 
+#include "Assets.h"
+
 void Renderer::dibujar(sf::RenderTarget& window, World& mundo, float dt)
 {
 	
@@ -36,6 +38,18 @@ void Renderer::dibujar_proyectiles(sf::RenderTarget& window, World& mundo)
 {
 	for (auto& proyectil : mundo.getProyectiles())
 	{
-		proyectil.render(window);
+		const bool esJugador = proyectil.getPropietario() == ProjectileOwner::Player;
+		const sf::Texture& textura = assets_manager.get_texture(esJugador ? "bala_roja" : "bala_morada");
+		const sf::Vector2u tam = textura.getSize();
+		const float diametroVisual = esJugador ? 44.f : 58.f;
+		const float escala = diametroVisual / static_cast<float>(tam.x);
+
+		sf::Sprite sprite(textura);
+		sprite.setOrigin({ tam.x / 2.f, tam.y / 2.f });
+		sprite.setScale({ escala, escala });
+		sprite.setPosition(proyectil.getPosicion());
+		window.draw(sprite);
 	}
+	
+
 }

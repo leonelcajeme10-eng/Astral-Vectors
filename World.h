@@ -6,6 +6,7 @@
 #include <vector>
 #include "SistemaColisiones.h"
 #include "SistemaPuntuacion.h"
+#include "Assets.h"
 
 class World
 {
@@ -18,10 +19,11 @@ private:
 	SistemaPuntuacion sistema_puntuacion;
 	bool cooldownInicialBoss;
 	float tiempoInicioBoss;
+	float tiempoSonidoBoss;
 
 public:
 	World();
-	void update(float dt);
+	void update(float dt, Assets& asset);
 	Player& getJugador();
 	Boss& getBoss();
 	std::vector<Proyectil>& getProyectiles();

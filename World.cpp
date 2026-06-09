@@ -2,17 +2,21 @@
 #include "SistemaColisiones.h"
 #include <iostream>
 
+#include "assets.h"
+
 World::World()
 {
 	cooldownInicialBoss = true;
 	tiempoInicioBoss = 0.f;
+	tiempoSonidoBoss = 0.2f;
 }
 
-void World::update(float dt)
+void World::update(float dt,Assets& asset)
 {
 	jugador.update(dt); // actualiza jugador
 	jefe.update(dt);
 	sistema_puntuacion.update(dt);
+	tiempoSonidoBoss += dt;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && (jugador.canShoot()))
 	{
 		std::vector<Proyectil> proyectilesJugador = jugador.disparar();
@@ -21,6 +25,8 @@ void World::update(float dt)
 		{
 			proyectiles.push_back(proyectil);
 		}
+
+		asset.reproducir_sfx("disparo");
 	}
 
 	if (cooldownInicialBoss)
@@ -37,6 +43,12 @@ void World::update(float dt)
 		if (jefe.getVida() > 0)
 		{
 			std::vector<Proyectil> proyectilesJefe = jefe.atacar();
+
+			if (!proyectilesJefe.empty() && tiempoSonidoBoss >= 0.2f)
+			{
+				asset.reproducir_sfx("disparo_boss");
+				tiempoSonidoBoss = 0.f;
+			}
 
 			for (auto& proyectil : proyectilesJefe) // recorre los proyectiles jefe y los mete a los totales
 			{
