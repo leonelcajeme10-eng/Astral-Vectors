@@ -61,9 +61,21 @@ void Game::actualizar_musica(int fase)
 	}
 }
 
-void Game::actualizar_sonidos()
-{
 
+
+
+void Game::reiniciar_partida()
+{
+	world = World();
+	fase4DialogoMostrado = false;
+	risaGameOverReproducida = false;
+	dialogo_fase_4.reset();
+}
+
+void Game::registrar_fin_partida()
+{
+	risaGameOverReproducida = false;
+	estado = GameState::GameOver;
 }
 
 void Game::run()
@@ -136,6 +148,9 @@ void Game::run()
 
 			case GameState::Playing:
 
+
+
+
 				if (const auto* tecla = evento->getIf<sf::Event::KeyPressed>())
 				{
 					if (estado == GameState::Playing && (tecla->code == sf::Keyboard::Key::P || tecla->code == sf::Keyboard::Key::Escape))
@@ -155,10 +170,20 @@ void Game::run()
 			case GameState::Pause:
 				pantalla_pausa.manejar_evento(*evento, estado);
 				break;
+
+			case GameState::Victory:
+			case GameState::GameOver:
+			case GameState::Win:
+				if (pantalla_game_over.manejar_eventos(estado, *evento))
+				{
+					ventana.close();
+				}
+				break;
 			}
 
 			if (estado_anterior != estado && estado == GameState::BossIntro)
 			{
+				reiniciar_partida();
 				intro_boss.reset();
 			}
 			
@@ -189,6 +214,22 @@ void Game::run()
 			}
 		}
 
+		if (estado == GameState::Playing && !intro_terminada_este_frame && !dialogo_fase_4_terminado_este_frame)
+		{
+			world.update(dt,assets);
+
+			if (world.getVidaBoss() <= 0 || world.getVidaJugador() <= 0)
+			{
+				registrar_fin_partida();
+			}
+			else if (!fase4DialogoMostrado && world.getFaseBoss() == 4)
+			{
+				fase4DialogoMostrado = true;
+				dialogo_fase_4.reset();
+				estado = GameState::Phase4Dialogue;
+			}
+		}
+
 		ventana.clear();
 
 		if (this->estado == GameState::Menu_estado)
@@ -202,24 +243,7 @@ void Game::run()
 		}
 		else if (this->estado == GameState::Playing) 
 		{
-			if (!intro_terminada_este_frame && !dialogo_fase_4_terminado_este_frame)
-			{
-				world.update(dt,assets);
-
-				if (!fase4DialogoMostrado && world.getFaseBoss() == 4)
-				{
-					fase4DialogoMostrado = true;
-					dialogo_fase_4.reset();
-					estado = GameState::Phase4Dialogue;
-				}
-			}
-
-			this->render.dibujar(ventana,world,estado == GameState::Phase4Dialogue ? 0.f : dt);
-
-			if (estado == GameState::Phase4Dialogue)
-			{
-				dialogo_fase_4.render(ventana);
-			}
+			this->render.dibujar(ventana,world,dt);
 		}
 		else if (this->estado == GameState::Phase4Dialogue)
 		{
@@ -233,6 +257,18 @@ void Game::run()
 			escena_pausa.display();
 
 			pantalla_pausa.dibujar(ventana, assets, escena_pausa.getTexture());
+		}
+		else if (this->estado == GameState::GameOver)
+		{
+
+			if (world.getVidaJugador() <= 0 && !risaGameOverReproducida)
+			{
+				assets.reproducir_sfx("risa");
+				risaGameOverReproducida = true;
+			}
+
+
+			pantalla_game_over.dibujar(ventana, assets, world);
 		}
 
 		actualizar_musica(world.getFaseBoss());

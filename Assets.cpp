@@ -49,6 +49,20 @@ bool Assets::cargar_texturas()
     }
     this->textura_nixie_tube.setSmooth(true);
 
+    if (!this->textura_bala_roja.loadFromFile("assets/images/bala_roja.png"))
+    {
+        std::cout << "No se pudo cargar assets/images/bala_roja.png\n";
+        return false;
+    }
+    this->textura_bala_roja.setSmooth(true);
+
+    if (!this->textura_bala_morada.loadFromFile("assets/images/bala_morada.png"))
+    {
+        std::cout << "No se pudo cargar assets/images/bala_morada.png\n";
+        return false;
+    }
+    this->textura_bala_morada.setSmooth(true);
+
    
 
 
@@ -59,6 +73,8 @@ bool Assets::cargar_texturas()
     textures["menu"] = textura_menu;
     textures["nixie_tube"] = textura_nixie_tube;
     textures["fondo"] = textura_fondo;
+    textures["bala_roja"] = textura_bala_roja;
+    textures["bala_morada"] = textura_bala_morada;
 
     auto cargar_textura_vn = [this](const string& nombre, const string& ruta)
         {
@@ -126,7 +142,7 @@ bool Assets::cargar_musica()
 
 bool Assets::cargar_sonido()
 {
-    map<string, string> mapa_sonidos = { {"disparo" ,"assets/Sounds/disparo.ogg"} , {"disparo_boss","assets/Sounds/disparo_boss.ogg"} };
+    map<string, string> mapa_sonidos = { {"disparo" ,"assets/Sounds/disparo.ogg"} , {"disparo_boss","assets/Sounds/disparo_boss.ogg"} , {"risa","assets/Music/risa.ogg"} };
 
     for (const auto& [nombre, ruta] : mapa_sonidos)
     {
@@ -137,8 +153,6 @@ bool Assets::cargar_sonido()
         }
 
     }
-
-
     return true;
 }
 
@@ -153,11 +167,11 @@ void Assets::reproducir_sfx(const string& nombre)
     {
         sf::Sound nuevo_sonido(it->second);
 
-        float pitch_aleatorio = 0.80f + (rand() % 10) / 100.f;
+        float pitch_aleatorio = 0.90f + (rand() % 10) / 100.f;
         nuevo_sonido.setPitch(pitch_aleatorio);
 
         sonidos_activos.emplace_back(move(nuevo_sonido));
-        sonidos_activos.back().setVolume(10.f);
+        sonidos_activos.back().setVolume(15.f);
       
         sonidos_activos.back().play();
     }

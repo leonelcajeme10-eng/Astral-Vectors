@@ -21,6 +21,8 @@ protected:
 	sf::Texture textura_menu;
 	sf::Texture textura_nixie_tube;
 	sf::Texture textura_fondo;
+	sf::Texture textura_bala_roja;
+	sf::Texture textura_bala_morada;
 	
 
 public:
